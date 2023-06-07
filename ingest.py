@@ -22,7 +22,7 @@ from langchain.document_loaders import (
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.embeddings import OpenAIEmbeddings
 from langchain.docstore.document import Document
 from constants import CHROMA_SETTINGS
 
@@ -140,7 +140,7 @@ def does_vectorstore_exist(persist_directory: str) -> bool:
 
 def main():
     # Create embeddings
-    embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
+    embeddings = OpenAIEmbeddings(deployment=embeddings_model_name, chunk_size=1)
 
     if does_vectorstore_exist(persist_directory):
         # Update and store locally vectorstore
